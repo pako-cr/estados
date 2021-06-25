@@ -1,8 +1,14 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+
+import 'package:estados/bloc/user/user_cubit.dart';
+import 'package:estados/models/user.dart';
 
 class Page2Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final userCubit = context.read<UserCubit>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Page 2'),
@@ -18,7 +24,12 @@ class Page2Page extends StatelessWidget {
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
             color: Colors.blue,
-            onPressed: () {},
+            onPressed: () {
+              userCubit.setUser(new User(
+                  name: 'Mali',
+                  age: 1,
+                  careers: ['Professional Dog', 'Professional ball chaser']));
+            },
           ),
           MaterialButton(
             child: Text(
@@ -27,7 +38,9 @@ class Page2Page extends StatelessWidget {
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
             color: Colors.blue,
-            onPressed: () {},
+            onPressed: () {
+              userCubit.setUserAge();
+            },
           ),
           MaterialButton(
             child: Text(
@@ -36,7 +49,20 @@ class Page2Page extends StatelessWidget {
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
             ),
             color: Colors.blue,
-            onPressed: () {},
+            onPressed: () {
+              userCubit.addUserCareer('Professional Dog');
+            },
+          ),
+          MaterialButton(
+            child: Text(
+              'Remove User',
+              style:
+                  TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+            ),
+            color: Colors.blue,
+            onPressed: () {
+              userCubit.removeUser();
+            },
           )
         ],
       )),
